@@ -2,11 +2,13 @@
 
 Inquiry-driven independent site for TopLink Electronics — custom cable and wire harness contract manufacturer. Upgrades the old www.toplinkelec.com portal to a Gemini-inspired light-themed site with a product catalog, product-level inquiry capture, and an admin backend for catalog + inquiry management.
 
+**Live**: https://toplink-site.vercel.app · **Deployment**: Auto-deploy on push to `main` via Vercel GitHub integration.
+
 ## Stack
 
 - **Next.js 16** (App Router, Turbopack, React 19)
 - **Tailwind CSS 4** (CSS-first theme tokens in `src/app/globals.css`)
-- **Prisma 7** + **SQLite** (local dev) — swap to Postgres in prod by changing the provider and `DATABASE_URL`
+- **Prisma 7** + **Neon Postgres** (`@prisma/adapter-neon` HTTP driver, Vercel serverless compatible)
 - **jose** JWT session cookies for admin auth
 - **Resend** for inquiry email notifications (falls back to DB-only if `RESEND_API_KEY` is unset)
 - **Zod** for server-side form validation
