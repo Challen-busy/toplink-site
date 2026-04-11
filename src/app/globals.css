@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   TopLink — Gemini-inspired light theme tokens
+   ------------------------------------------------------------------ */
+:root {
+  /* Surfaces */
+  --background: #fafafc;
+  --surface: #ffffff;
+  --surface-muted: #f3f4f8;
+  --foreground: #1f1f23;
+  --foreground-muted: #5b5d6b;
+  --border: rgba(17, 17, 23, 0.08);
+  --border-strong: rgba(17, 17, 23, 0.14);
+
+  /* Gemini Aurora gradient stops */
+  --aurora-1: #8b6ff5; /* violet */
+  --aurora-2: #3bc6e8; /* cyan */
+  --aurora-3: #f5a97f; /* peach */
+  --aurora-4: #ff7eb6; /* pink */
+
+  /* Semantic */
+  --brand: #6750f4;
+  --brand-soft: #eceafd;
+  --success: #19a974;
+  --warning: #ffb020;
+  --danger: #e5484d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-aurora-1: var(--aurora-1);
+  --color-aurora-2: var(--aurora-2);
+  --color-aurora-3: var(--aurora-3);
+  --color-aurora-4: var(--aurora-4);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-display);
+
+  --radius-card: 1.75rem;
+  --radius-pill: 999px;
+}
+
+/* Base */
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), ui-sans-serif, system-ui;
+  letter-spacing: -0.02em;
+}
+
+/* Gradient text helper */
+.text-aurora {
+  background-image: linear-gradient(
+    110deg,
+    var(--aurora-1) 0%,
+    var(--aurora-2) 40%,
+    var(--aurora-3) 75%,
+    var(--aurora-4) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Aurora soft background blob */
+.bg-aurora-soft {
+  background-image: radial-gradient(
+      1200px 600px at 20% 10%,
+      rgba(139, 111, 245, 0.25),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 80% 0%,
+      rgba(59, 198, 232, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 60% 80%,
+      rgba(245, 169, 127, 0.18),
+      transparent 65%
+    );
+}
+
+/* Aurora border on hover for cards */
+.card-hover-border {
+  position: relative;
+}
+.card-hover-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--aurora-1),
+    var(--aurora-2),
+    var(--aurora-3)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.card-hover-border:hover::before {
+  opacity: 1;
+}
+
+/* Fade + rise animation */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-rise {
+  animation: rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Section container */
+.container-site {
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1.5rem;
+}
+@media (min-width: 768px) {
+  .container-site {
+    padding-inline: 2.5rem;
+  }
+}
