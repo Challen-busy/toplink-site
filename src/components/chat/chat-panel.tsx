@@ -262,20 +262,19 @@ export function ChatPanel({ onClose }: Props) {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           {/* Call Human button */}
           <button
             onClick={() => setShowHandoff(true)}
-            className="h-8 w-8 rounded-full hover:bg-surface-muted flex items-center justify-center text-foreground-muted hover:text-foreground transition-colors"
-            aria-label="Contact human agent"
-            title="Contact human agent"
+            className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-foreground-muted hover:text-foreground hover:border-foreground transition-colors"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
               <circle cx="9" cy="7" r="4" />
               <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
               <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
+            <span>Human</span>
           </button>
           {/* Close button */}
           <button
