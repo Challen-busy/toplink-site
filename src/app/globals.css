@@ -141,6 +141,19 @@ body {
   animation: rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Slide-in from right (chat sidebar) */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* Focus ring */
 *:focus-visible {
   outline: 2px solid var(--brand);

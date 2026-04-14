@@ -127,6 +127,43 @@ model SiteSettings {
 }
 
 // -----------------------------------------------------------
+// Live chat sessions & messages
+// -----------------------------------------------------------
+model ChatSession {
+  id        String        @id @default(cuid())
+  status    ChatStatus    @default(AI)
+  language  String? // detected visitor language, e.g. "en", "zh"
+  visitorIp String?
+  userAgent String?
+  pageUrl   String? // page visitor was on when they started the chat
+  summary   String? // AI-generated one-liner for admin list
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  messages  ChatMessage[]
+
+  @@index([status, updatedAt])
+}
+
+enum ChatStatus {
+  AI
+  HANDOFF
+  HUMAN
+  CLOSED
+}
+
+model ChatMessage {
+  id        String      @id @default(cuid())
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  role      String // "visitor" | "ai" | "human" | "system"
+  content   String
+  toolCall  String? // JSON: serialized function call for audit
+  createdAt DateTime    @default(now())
+
+  @@index([sessionId, createdAt])
+}
+
+// -----------------------------------------------------------
 // Success cases (editable in admin, shown on home)
 // -----------------------------------------------------------
 model SuccessCase {
