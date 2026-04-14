@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const chatMessageSchema = z.object({
-  sessionId: z.string().optional(),
+  sessionId: z.string().optional().nullable(),
   message: z.string().min(1, "Message cannot be empty").max(4000),
-  pageUrl: z.string().max(500).optional(),
+  pageUrl: z.string().max(500).optional().nullable(),
 });
 
 export type ChatMessageInput = z.infer<typeof chatMessageSchema>;

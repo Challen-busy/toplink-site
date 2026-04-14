@@ -28,7 +28,7 @@ export async function POST(req: Request) {
   }
 
   const { message, pageUrl } = parsed.data;
-  let { sessionId } = parsed.data;
+  let sessionId = parsed.data.sessionId ?? undefined;
 
   const ipHeader =
     req.headers.get("x-forwarded-for") ?? req.headers.get("x-real-ip") ?? "";
