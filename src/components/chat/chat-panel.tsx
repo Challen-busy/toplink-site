@@ -517,7 +517,10 @@ function HandoffModal({
               <div>
                 <p className="text-xs text-foreground-muted">Phone</p>
                 <p className="text-sm font-medium">
-                  <a href="tel:+8676985648091" className="hover:text-brand">+86-769-85648091</a>
+                  <a href="tel:+8613480471997" className="hover:text-brand">+86 134-8047-1997</a>
+                </p>
+                <p className="text-sm font-medium">
+                  <a href="tel:+8676985648091" className="hover:text-brand text-foreground-muted">+86-769-85648091</a>
                 </p>
               </div>
             </div>
@@ -529,7 +532,10 @@ function HandoffModal({
               <div>
                 <p className="text-xs text-foreground-muted">Email</p>
                 <p className="text-sm font-medium">
-                  <a href="mailto:sales@toplinkelec.com" className="hover:text-brand">sales@toplinkelec.com</a>
+                  <a href="mailto:Lee@toplinkelec.com" className="hover:text-brand">Lee@toplinkelec.com</a>
+                </p>
+                <p className="text-sm font-medium">
+                  <a href="mailto:sales@toplinkelec.com" className="hover:text-brand text-foreground-muted">sales@toplinkelec.com</a>
                 </p>
               </div>
             </div>
