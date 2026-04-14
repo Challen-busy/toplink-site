@@ -220,8 +220,9 @@ export async function POST(req: Request) {
         }
 
         // Save full AI message
+        let savedMsgId: string | null = null;
         if (fullContent) {
-          await db.chatMessage.create({
+          const saved = await db.chatMessage.create({
             data: {
               sessionId: session.id,
               role: "ai",
@@ -231,6 +232,7 @@ export async function POST(req: Request) {
                 : null,
             },
           });
+          savedMsgId = saved.id;
 
           // Auto-detect language from first AI reply & update session
           if (!session.language) {
@@ -244,7 +246,7 @@ export async function POST(req: Request) {
           }
         }
 
-        send({ done: true, sessionId: session.id });
+        send({ done: true, sessionId: session.id, messageId: savedMsgId });
       } catch (err) {
         console.error("[chat] stream error", err);
         send({

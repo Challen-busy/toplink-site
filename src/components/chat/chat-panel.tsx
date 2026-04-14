@@ -140,6 +140,7 @@ export function ChatPanel({ onClose }: Props) {
       const decoder = new TextDecoder();
       let accumulated = "";
       let buffer = "";
+      let doneMsgId = "";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -196,7 +197,11 @@ export function ChatPanel({ onClose }: Props) {
               const sid = data.sessionId as string;
               sessionIdRef.current = sid;
               localStorage.setItem("toplink_chat_session", sid);
-              lastMsgIdRef.current = null; // reset poll position
+            }
+            // Use real DB message ID so polling won't re-add this message
+            if (data.messageId) {
+              doneMsgId = data.messageId as string;
+              lastMsgIdRef.current = doneMsgId;
             }
           }
 
@@ -206,12 +211,12 @@ export function ChatPanel({ onClose }: Props) {
         }
       }
 
-      // Finalize streaming message
+      // Finalize streaming message — use real DB ID so poll dedup works
       if (accumulated) {
         setMessages((prev) => [
           ...prev,
           {
-            id: `ai-${Date.now()}`,
+            id: doneMsgId || `ai-${Date.now()}`,
             role: "ai",
             content: accumulated,
           },
